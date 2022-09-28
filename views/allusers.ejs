@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        .cards{
+            width: 100%;
+            height: 30vw;
+            background-color: rgb(247, 107, 107);
+            display: flex;
+            gap: 2vw;
+        }
+        .card{
+            width: 20vmax;
+            height: 20vw;
+            background-color: rgb(46, 101, 202);
+            
+        }
+    </style>
+</head>
+<body>
+    <a href="/homepage">Homepage</a>
+    <h2>All users</h2>
+
+    <div class="cards">
+    <% peoples.forEach(people => { %>
+        <% if (people._id ) {
+            
+        } %> 
+        <div class="card">
+            <i style="font-size: 2vw;" id="addfriend" class="ri-user-add-fill"></i>
+            <h1><%= people.email %> </h1>
+            <h3> <%= people.username %> </h3> 
+            <h4>Age: <%= people.age %> </h4>
+            <h3>D.O.B: <%= people.dob %> </h3>
+            <h3><%= people._id %> </h3>
+        </div>
+        <%}) %> 
+    </div>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // var addFrnd = document.querySelector("#addfriend")
+        // addFrnd.addEventListener("click", function(e){
+        //     axios.post()
+        // })
+        var cards = document.querySelector(".cards")
+        cards.addEventListener("click" ,function(e){
+            console.log(e.target.nextElementSibling.firstChild.data);
+            // console.log(e.target.nextSibling.nextElementSibling.nextSibling.nextElementSibling.nextSibling.nextElementSibling.nextElementSibling.nextElementSibling);
+            console.log(e);
+            axios.get(`/add-friend/${e.target.nextElementSibling.firstChild.data}`).then(function(resp){
+                console.log(resp);
+            })
+        })
+
+    </script>
+</body>
+</html>

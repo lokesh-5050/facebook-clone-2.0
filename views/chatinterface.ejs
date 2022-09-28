@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<style>
+    #main{
+        width: 100%;
+        height: 100%;
+        
+    }
+    .chatBox{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .chatInterface{
+        width: 40vw;
+        height: 50vw;
+        background-color: skyblue;
+
+    }
+    .frndsImg {
+        width: inherit;
+        display: flex;
+        align-items: center;
+        padding-left: 1vw;
+    }
+    .topBar i{
+        font-size: 1.5vw;
+        margin-right: 1vw;
+    }
+    .frndsImg h4{
+        margin-left: 2vw;
+    }
+    .frndsImg img{
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+    }
+    .topBar{
+        width: inherit;
+        height: 5vw;
+        background-color: palevioletred;
+        display: flex;
+        align-items: center;
+
+        
+    }
+    .msgArea{
+        width: inherit;
+        height: 41vw;
+        background-color: teal;
+    }
+    .footer{
+        width: inherit;
+        height: 4vw;
+        background-color: palegreen;
+    }
+    .msgText{
+        width: 80%;
+        height: 3.6vw;
+    }
+    .msgForm i{
+        display: inline;
+        margin-left: 1vw;
+        font-size: 1.2vmax;
+    }
+</style>
+<body>
+    <div id="main">
+        <a href="/messages">Go to All messages , <%= loggInU.username  %> </a>
+        <div class="chatBox">
+            <div class="chatInterface">
+                <div class="topBar">
+
+                    <div class="frndsImg">
+                        <img src="../images/uploads/<%= frndInfo.profilePic %> " alt="hey">
+    
+                        <h4><%= frndInfo.username %> </h4>
+                    </div>
+                    <i class="ri-more-2-fill"></i>
+                </div>
+                <div style="position: relative; overflow-y: auto;" class="msgArea">
+                   
+                    <% frndInfo.receivedMessages.forEach(recMsg => {%>
+                        <h4 style="background-color: red;width: fit-content;display: flex;justify-content: flex-end;margin-left: 35vw;"><%= recMsg.messageText %>  </h4>  
+                    <%}); %> 
+                        
+
+                </div>
+                <div class="footer">
+                    <form class="msgForm" action="/compose/<%= loggInU._id %>/<%= frndInfo._id %> " method="post">
+                        <input class="msgText" type="text" name="messageText" placeholder="Write a messgae">
+                        <i class="ri-emotion-line"></i>
+                        <button><i class="ri-send-plane-fill"></i></button>
+                        
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var msgArea = document.querySelector(".msgArea")
+        var sentMsg = document.querySelector(".sentMsg")
+        msgArea.scrollTo(0, sentMsg.scrollHeight);
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rect{
+            width: 50%;
+            height: 30vh;
+            padding: 20vh;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            background-color: palevioletred;
+        }
+        .msg{
+            width: 20vw;
+            height: 5vw;
+            background-color: rgba(216, 91, 45, 0.74);
+        }
+    </style>
+</head>
+<body>
+    <h2>All Friends of <lead><%= allFriends.username %> </lead> </h2>
+    <div class="rect">
+        <% allFriends.friends.forEach(friend => {%>
+           <a href="/chatInterface/<%= friend.frndId._id %> ">
+            <div style="display: flex;" class="msg">
+                <img style="width: 35px;height: 35px;border-radius: 50%;" src="../images/uploads/<%= friend.frndId.profilePic %> "  alt="">
+                <h3>username: <%= friend.frndId.username %> </h3>
+            </div>
+           </a>
+        <%}) %>
+    </div>
+</body>
+</html>

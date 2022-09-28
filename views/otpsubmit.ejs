@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>We sent a code to your entered email [<%= forgotEmailTypedExist.email %>] , if that email exist then you should receive a otp </label>
+
+    <form id="otpForm" action="/verify/otp/<%= forgotEmailTypedExist.email %>" method="post">
+        <label >please enter the otp</label>
+        <input type="number" name="otp" placeholder="type your otp">
+        <input type="submit" value="verify otp & login">
+    </form>
+
+</body>
+</html>

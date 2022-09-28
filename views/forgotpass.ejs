@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/">back</a>
+    <form id="forgotForm" action="/forgot/password" method="post">
+        <label for="">Type In the User's Email </label>
+        <input type="text" id="inputEmail" name="forgotEmail" placeholder="email">
+        <input type="submit" value="Send Login Link">
+    </form>
+    
+    
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    //also doing forgot by axios
+    // var forgotForm = document.getElementById("forgotForm")
+    // var inputEmail = document.getElementById("inputEmail")
+    // forgotForm.addEventListener("submit" , async(e)=>{
+    //     e.preventDefault()
+    //     var typedEmail = inputEmail.value
+    //     var res= await axios.get(`/forgot/password/${typedEmail}`)
+    //     console.log(res.data);
+    //     inputEmail.value = ""
+    // })
+
+
+
+
+    
+    
+
+</script>
+
+</html>
