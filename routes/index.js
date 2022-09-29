@@ -1,4 +1,3 @@
-var ObjectId = require('mongodb').ObjectID;
 var express = require('express');
 const passport = require('passport');
 var router = express.Router();
@@ -11,6 +10,8 @@ const msgModel = require("./message")
 const localStrategy = require("passport-local")
 const multer = require("multer");
 const moment = require('moment/moment');
+
+const {alert} = require("node-popup")
 
 passport.use(new localStrategy({ usernameField: 'email' }, userModel.authenticate()))
 
@@ -418,26 +419,37 @@ router.post("/verify/otp/:toForgotEmail", async function (req, res, next) {
   console.log(EmailToForgot + "...line 414");
   var enteredOtp = req.body.otp
   console.log(enteredOtp + "...line 415");
-
-
   if (EmailToForgot.otp === enteredOtp || EmailToForgot.expiresAt > Date.now()) {
     // res.redirect("/homepage")
-    const allUsers = await userModel.find({ _id: { $ne: EmailToForgot._id } })
-
-    const allPosts = await postModel.find().populate("user")
-
-    // console.log(allUsers);
-    console.log(allPosts + "all posts");
-    res.render("homepage", { user: EmailToForgot, peoples: allUsers, posts: allPosts })
-    // res.json("otp - matched")
+    // const allUsers = await userModel.find({ _id: { $ne: EmailToForgot._id } })
+    // const allPosts = await postModel.find().populate("user")
+    // // console.log(allUsers);
+    // console.log(allPosts + "all posts");
+    // res.render("homepage", { user: EmailToForgot, peoples: allUsers, posts: allPosts })
+    // // res.json("otp - matched")
+    res.render("setnewpass", { user: EmailToForgot })
   } else {
     res.json("bhag lavde")
   }
-
-
-
 });
 
+router.post("/setnewpass/:thatEmail", async (req, res, next) => {
+  const thatEmail = await userModel.findOne({ email: req.params.thatEmail })
+  const newPassword = req.body.newPassword;
+  const confirmPassword = req.body.confirmPassword;
+  if (newPassword === confirmPassword) {
+    thatEmail.setPassword(req.body.confirmPassword, async function (err, user) {
+      if (err) throw err
+      console.log(user);
+      thatEmail.save()
+      const allUsers = await userModel.find({ _id: { $ne: thatEmail._id } })
+      const allPosts = await postModel.find().populate("user")
+      res.render("homepage", { user: thatEmail, peoples: allUsers, posts: allPosts })
+    }
+)}else{
+  alert("Password does not match! , try again ")
+}
+})
 
 
 
